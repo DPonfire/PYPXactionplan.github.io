@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awareness Campaign</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background-color: #008080;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+        .container + .container {
+            margin-top: 40px; /* Add space between containers */
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #ddd;
+        }
+        .dark-mode .container {
+            background: #333;
+        }
+        .toggle-btn {
+            margin: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #008080;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .toggle-btn:hover {
+            background-color: #005f5f;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        a {
+            color: #3399ff; /* Lighter blue */
+            text-decoration: none;
+        }
+        a:visited {
+            color: #cc99ff; /* Lighter purple */
+        }
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #008080;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #005f5f;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content button {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 0; /* Reset border-radius for dropdown items */
+        }
+
+        .dropdown-content button:hover {
+            background-color: #ddd;
+        }
+
+        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+        .show {
+            display: block;
+        }
+
+        /* Arrow styling */
+        .dropbtn::after {
+            content: '\25BC'; /* Unicode character for a down-pointing triangle */
+            font-size: 0.8em;
+            margin-left: 5px;
+            vertical-align: middle;
+            display: inline-block;
+            transition: transform 0.3s ease; /* Smooth transition for animation */
+        }
+
+        .dropbtn.active::after {
+            transform: rotate(180deg); /* Rotate the arrow when dropdown is active */
+        }
+    </style>
+    <script>
+        let currentLanguage = 'en'; // Default language
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            const darkMode = document.body.classList.contains("dark-mode");
+            const toggleBtn = document.querySelector('.toggle-btn');
+
+            // Update toggleDarkMode text in the current language
+            const translations = {
+                'en': { 'toggleDarkMode': darkMode ? 'Switch to Light Mode &#x2600;' : 'Switch to Dark Mode &#x1F319;' },
+                'sq': { 'toggleDarkMode': darkMode ? 'Aktivizo Modalitetin e Lehtë &#x2600;' : 'Aktivizo Modalitetin e Errët &#x1F319;' },
+                'de': { 'toggleDarkMode': darkMode ? 'Zum Hellmodus wechseln &#x2600;' : 'Zum Dunkelmodus wechseln &#x1F319;' },
+                'fr': { 'toggleDarkMode': darkMode ? 'Passer au mode clair &#x2600;' : 'Passer au mode sombre &#x1F319;' }
+            };
+
+            toggleBtn.innerHTML = translations[currentLanguage].toggleDarkMode;
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const translations = {
+                'en': {
+                    'title': 'Awareness Campaign',
+                    'headerTitle': 'Raise Awareness for a Better Future',
+                    'toggleDarkMode': 'Switch to Dark Mode &#x1F319;',
+                    'aboutCause': 'About Our Cause',
+                    'causeText': 'Every year, countless broken devices and trash are discarded improperly. When electronic devices are thrown away, it contributes to e-waste. Pollution comes in three main forms:',
+                    'landPollution': 'Land Pollution',
+                    'landPollutionText': 'Waste discarded on land, such as trash and debris.',
+                    'waterPollution': 'Water Pollution',
+                    'waterPollutionText': 'Contaminants like plastics that pollute our oceans and rivers.',
+                    'airPollution': 'Air Pollution',
+                    'airPollutionText': 'Harmful gases and toxins released into the air, including those from e-waste.',
+                    'howStop': 'How Can We Stop This?',
+                    'howStopText': 'We can reduce e-waste by recycling, selling old electronics instead of discarding them, and using platforms like Jawa to repurpose gadgets. This helps keep our environment clean and protects us from radiation and toxins.',
+                    'researchQuestions': 'Our Research Questions',
+                    'question1': 'How electronics are made and what resources they use?',
+                    'summary1': 'A summary of what we found out:',
+                    'answer1': 'We found out that electronics are made by using an automated and manual procces. What I mean by this is that most of the stuff (like the carving of the bronze motherboards which is done by a robot) and the other part is getting made by humans (like heating the wrap around it) there are some electronic parts that get completely made by robots (like Printed Circuit Boards or PCBs for short). Mostly electronic parts are made by Finite Recources of non-renewable resources like lead or bronze or tin which means that if we keep using these resources they will eventually run out and cause a problem.',
+                    'question2': 'How e-waste and pollution from electronics affect animals and the planet?',
+                    'summary2': 'A summary of what we found out:',
+                    'answer2': 'We found out that e-waste can add air pollution and land pollution and this ia a very concerable problem in the world and it has to get fixed. It affects animals and the planst by the pollution part and the waste part. On land pollution  animals can stumble across and think of the waste as food and eat the waste which gets them sick and they eventually (by the uncurable sickness) they unfortunatly die. But they affect the planet by polluting the air. As we said above when electronics get broken or rusted they release toxins which leads to air pollution and makes a hole in the ozone layes (protects us from the UV Lights of the sun and is located on the sky) if that layer gets damaged and we get exposed from it we will die to the radiation of the sun.',
+                    'question3': 'Ways to reduce the negative impact of electronics on the environment',
+                    'summary3': 'A summary of what we found out:',
+                    'answer3': 'We found a lot of ways to reduce the negative impact of electronics on the environment. They are for what you guys can do! As above at the section that says "How can we stop this?" there is a part that says that if you have any broken devices sell them as scrap to other companies or websites and this part is very important because it a win-win because it helps you to get rid of the toxins that you have in your house and they also pay you for it and they also recycle the usable parts from the electronic device/s and put them into other devices wich helps them, our planet and you guys.',
+                    'thankYou': 'Thank You for Reading!',
+                    'references': 'References/Sources',
+                    'copyright': '&copy; 2025 Awareness Campaign. All rights reserved.'
+                },
+                'sq': {
+                    'title': 'Fushatë Ndërgjegjësimi',
+                    'headerTitle': 'Rrisni Ndërgjegjësimin për një të Ardhme më të Mirë',
+                    'toggleDarkMode': 'Aktivizo/Çaktivizo Modalitetin e Errët',
+                    'aboutCause': 'Rreth Kauzës Sonë',
+                    'causeText': 'Çdo vit, pajisje të panumërta të thyera dhe mbeturina hidhen në mënyrë të pahijshme. Kur pajisjet elektronike hidhen, kjo kontribuon në mbetjet elektronike. Ndotja vjen në tre forma kryesore:',
+                    'landPollution': 'Ndotja e Tokës',
+                    'landPollutionText': 'Mbeturinat e hedhura në tokë, siç janë plehrat dhe mbetjet.',
+                    'waterPollution': 'Ndotja e Ujit',
+                    'waterPollutionText': 'Ndotës si plastika që ndotin oqeanet dhe lumenjtë tanë.',
+                    'airPollution': 'Ndotja e Ajrit',
+                    'airPollutionText': 'Gaze dhe toksina të dëmshme të lëshuara në ajër, duke përfshirë ato nga mbetjet elektronike.',
+                    'howStop': 'Si Mund ta Ndalim Këtë?',
+                    'howStopText': 'Ne mund të zvogëlojmë mbetjet elektronike duke ricikluar, duke shitur pajisjet e vjetra elektronike në vend që t’i hedhim, dhe duke përdorur platforma si Jawa për të ripërdorur pajisjet. Kjo ndihmon në mbajtjen e mjedisit tonë të pastër dhe na mbron nga rrezatimi dhe toksinat.',
+                    'researchQuestions': 'Pyetjet Tona Kërkimore',
+                    'question1': 'Si prodhohen elektronikat dhe çfarë burimesh përdorin ato?',
+                    'summary1': 'Një përmbledhje e asaj që zbuluam:',
+                    'answer1': 'Ne zbuluam se elektronikat prodhohen duke përdorur një proces të automatizuar dhe manual. Ajo që dua të them me këtë është se pjesa më e madhe e gjërave (si gdhendja e pllakave amë prej bronzi që bëhet nga një robot) dhe pjesa tjetër po bëhet nga njerëzit (si ngrohja e mbështjellësit rreth tij) ka disa pjesë elektronike që bëhen plotësisht nga robotët (si pllakat e qarkut të printuar ose PCB-të shkurt). Kryesisht pjesët elektronike janë bërë nga burime të kufizuara të burimeve jo të rinovueshme si plumbi ose bronzi ose kallaji, që do të thotë se nëse vazhdojmë t’i përdorim këto burime, ato përfundimisht do të mbarojnë dhe do të shkaktojnë një problem.',
+                    'question2': 'Si ndikojnë mbetjet elektronike dhe ndotja nga elektronika te kafshët dhe planeti?',
+                    'summary2': 'Një përmbledhje e asaj që zbuluam:',
+                    'answer2': 'Ne zbuluam se mbetjet elektronike mund të shtojnë ndotjen e ajrit dhe ndotjen e tokës dhe ky është një problem shumë shqetësues në botë dhe duhet të rregullohet. Ajo ndikon te kafshët dhe planeti nga pjesa e ndotjes dhe pjesa e mbetjeve. Në ndotjen e tokës, kafshët mund të hasin dhe të mendojnë për mbetjet si ushqim dhe të hanë mbetjet, gjë që i sëmurë dhe ato përfundimisht (nga sëmundja e pashërueshme) vdesin fatkeqësisht. Por ato ndikojnë në planet duke ndotur ajrin. Siç e thamë më lart, kur elektronika prishet ose ndryshket, ato lëshojnë toksina që çojnë në ndotjen e ajrit dhe krijojnë një vrimë në shtresën e ozonit (na mbron nga rrezet UV të diellit dhe ndodhet në qiell) nëse ajo shtresë dëmtohet dhe ne ekspozohemi prej saj, ne do të vdesim nga rrezatimi i diellit.',
+                    'question3': 'Mënyrat për të zvogëluar ndikimin negativ të elektronikës në mjedis',
+                    'summary3': 'Një përmbledhje e asaj që zbuluam:',
+                    'answer3': 'Ne gjetëm shumë mënyra për të zvogëluar ndikimin negativ të elektronikës në mjedis. Ato janë për atë që ju mund të bëni! Si më lart në seksionin që thotë "Si mund ta ndalim këtë?" ka një pjesë që thotë se nëse keni ndonjë pajisje të prishur, shiteni ato si skrap te kompani ose faqe interneti të tjera dhe kjo pjesë është shumë e rëndësishme sepse është një fitore-fitore sepse ju ndihmon të hiqni qafe toksinat që keni në shtëpinë tuaj dhe ata gjithashtu ju paguajnë për të dhe ata gjithashtu riciklojnë pjesët e përdorshme nga pajisja/et elektronike dhe i fusin në pajisje të tjera, gjë që i ndihmon ata, planetin tonë dhe juve.',
+                    'thankYou': 'Faleminderit që Lexuat!',
+                    'references': 'Referencat/Burimet',
+                    'copyright': '&copy; 2025 Fushata e Ndërgjegjësimit. Të gjitha të drejtat e rezervuara.'
+                },
+                'de': {
+                    'title': 'Aufklärungskampagne',
+                    'headerTitle': 'Schärfen Sie das Bewusstsein für eine bessere Zukunft',
+                    'toggleDarkMode': 'Dunkelmodus umschalten',
+                    'aboutCause': 'Über unsere Sache',
+                    'causeText': 'Jedes Jahr werden unzählige defekte Geräte und Müll unsachgemäß entsorgt. Wenn elektronische Geräte weggeworfen werden, trägt dies zu Elektroschrott bei. Umweltverschmutzung gibt es in drei Hauptformen:',
+                    'landPollution': 'Landverschmutzung',
+                    'landPollutionText': 'Abfälle, die an Land entsorgt werden, wie z. B. Müll und Ablagerungen.',
+                    'waterPollution': 'Wasserverschmutzung',
+                    'waterPollutionText': 'Schadstoffe wie Kunststoffe, die unsere Ozeane und Flüsse verschmutzen.',
+                    'airPollution': 'Luftverschmutzung',
+                    'airPollutionText': 'Schädliche Gase und Giftstoffe, die in die Luft freigesetzt werden, einschließlich solcher aus Elektroschrott.',
+                    'howStop': 'Wie können wir das stoppen?',
+                    'howStopText': 'Wir können Elektroschrott reduzieren, indem wir recyceln, alte Elektronik verkaufen, anstatt sie zu entsorgen, und Plattformen wie Jawa nutzen, um Geräte wiederzuverwenden. Dies trägt dazu bei, unsere Umwelt sauber zu halten und uns vor Strahlung und Giftstoffen zu schützen.',
+                    'researchQuestions': 'Unsere Forschungsfragen',
+                    'question1': 'Wie werden elektronische Geräte hergestellt und welche Ressourcen werden dafür verwendet?',
+                    'summary1': 'Eine Zusammenfassung unserer Ergebnisse:',
+                    'answer1': 'Wir haben herausgefunden, dass elektronische Geräte mithilfe eines automatisierten und manuellen Prozesses hergestellt werden. Damit meine ich, dass der Großteil der Dinge (wie das Schnitzen der Motherboards aus Bronze, das von einem Roboter erledigt wird) und der andere Teil von Menschen hergestellt wird (wie das Erhitzen der Umhüllung). Es gibt einige elektronische Teile, die vollständig von Robotern hergestellt werden (wie z. B. Leiterplatten oder kurz PCBs). Die meisten elektronischen Teile werden aus endlichen Ressourcen nicht erneuerbarer Ressourcen wie Blei, Bronze oder Zinn hergestellt, was bedeutet, dass diese Ressourcen irgendwann zur Neige gehen und ein Problem verursachen, wenn wir sie weiterhin nutzen.',
+                    'question2': 'Wie wirken sich Elektroschrott und Umweltverschmutzung durch elektronische Geräte auf Tiere und den Planeten aus?',
+                    'summary2': 'Eine Zusammenfassung unserer Ergebnisse:',
+                    'answer2': 'Wir haben herausgefunden, dass Elektroschrott die Luft- und Landverschmutzung verstärken kann, und dies ist ein sehr besorgniserregendes Problem auf der Welt, das behoben werden muss. Sie beeinträchtigt Tiere und den Planeten durch den Verschmutzungs- und den Abfallteil. Bei der Landverschmutzung können Tiere auf den Abfall stoßen, ihn für Nahrung halten und den Abfall fressen, was sie krank macht und sie schließlich (an der unheilbaren Krankheit) unglücklicherweise sterben lässt. Sie beeinträchtigen den Planeten jedoch, indem sie die Luft verschmutzen. Wie bereits erwähnt, setzen elektronische Geräte, wenn sie kaputt gehen oder rosten, Giftstoffe frei, die zu Luftverschmutzung führen und ein Loch in die Ozonschicht reißen (die uns vor den UV-Strahlen der Sonne schützt und sich am Himmel befindet). Wenn diese Schicht beschädigt wird und wir ihr ausgesetzt sind, sterben wir an der Strahlung der Sonne.',
+                    'question3': 'Möglichkeiten zur Reduzierung der negativen Auswirkungen elektronischer Geräte auf die Umwelt',
+                    'summary3': 'Eine Zusammenfassung unserer Ergebnisse:',
+                    'answer3': 'Wir haben viele Möglichkeiten gefunden, die negativen Auswirkungen elektronischer Geräte auf die Umwelt zu reduzieren. Sie sind für das, was ihr tun könnt! Wie oben im Abschnitt „Wie können wir das stoppen?“ heißt es, dass Sie defekte Geräte als Schrott an andere Unternehmen oder Websites verkaufen sollen. Dieser Teil ist sehr wichtig, da er eine Win-Win-Situation darstellt, da er Ihnen hilft, die Giftstoffe loszuwerden, die Sie in Ihrem Haus haben, und sie Sie auch dafür bezahlen und sie auch die brauchbaren Teile aus dem/den elektronischen Gerät(en) recyceln und in andere Geräte einbauen, was ihnen, unserem Planeten und euch hilft.',
+                    'thankYou': 'Danke für das Lesen!',
+                    'references': 'Referenzen/Quellen',
+                    'copyright': '&copy; 2025 Aufklärungskampagne. Alle Rechte vorbehalten.'
+                },
+                 'fr': {
+                    'title': 'Campagne de sensibilisation',
+                    'headerTitle': 'Sensibiliser pour un avenir meilleur',
+                    'toggleDarkMode': 'Activer/désactiver le mode sombre',
+                    'aboutCause': 'À propos de notre cause',
+                    'causeText': 'Chaque année, d\'innombrables appareils cassés et déchets sont jetés de manière inappropriée. Lorsque des appareils électroniques sont jetés, cela contribue aux déchets électroniques. La pollution se présente sous trois formes principales:',
+                    'landPollution': 'Pollution terrestre',
+                    'landPollutionText': 'Déchets jetés sur terre, tels que les ordures et les débris.',
+                    'waterPollution': 'Pollution de l\'eau',
+                    'waterPollutionText': 'Contaminants tels que les plastiques qui polluent nos océans et nos rivières.',
+                    'airPollution': 'Pollution de l\'air',
+                    'airPollutionText': 'Gaz nocifs et toxines rejetés dans l\'air, y compris ceux provenant des déchets électroniques.',
+                    'howStop': 'Comment pouvons-nous arrêter cela?',
+                    'howStopText': 'Nous pouvons réduire les déchets électroniques en recyclant, en vendant de vieux appareils électroniques au lieu de les jeter, et en utilisant des plateformes comme Jawa pour réutiliser les gadgets. Cela aide à garder notre environnement propre et nous protège des radiations et des toxines.',
+                    'researchQuestions': 'Nos questions de recherche',
+                    'question1': 'Comment les appareils électroniques sont-ils fabriqués et quelles ressources utilisent-ils?',
+                    'summary1': 'Un résumé de ce que nous avons découvert:',
+                    'answer1': 'Nous avons découvert que les appareils électroniques sont fabriqués à l\'aide d\'un processus automatisé et manuel. Ce que je veux dire par là, c\'est que la plupart des choses (comme la sculpture des cartes mères en bronze qui est réalisée par un robot) et l\'autre partie sont fabriquées par des humains (comme le chauffage de l\'enveloppe autour de celle-ci), il existe des pièces électroniques qui sont entièrement fabriquées par des robots (comme les cartes de circuits imprimés ou PCB en abrégé). La plupart des pièces électroniques sont fabriquées à partir de ressources finies de ressources non renouvelables comme le plomb, le bronze ou l\'étain, ce qui signifie que si nous continuons à utiliser ces ressources, elles finiront par s\'épuiser et causer un problème.',
+                    'question2': 'Comment les déchets électroniques et la pollution provenant des appareils électroniques affectent-ils les animaux et la planète?',
+                    'summary2': 'Un résumé de ce que nous avons découvert:',
+                    'answer2': 'Nous avons découvert que les déchets électroniques peuvent ajouter de la pollution de l\'air et de la pollution terrestre, et c\'est un problème très préoccupant dans le monde et il doit être résolu. Cela affecte les animaux et la planète par la partie pollution et la partie déchets. En ce qui concerne la pollution terrestre, les animaux peuvent trébucher et considérer les déchets comme de la nourriture et manger les déchets, ce qui les rend malades et ils finissent par mourir (à cause de la maladie incurable). Mais ils affectent la planète en polluant l\'air. Comme nous l\'avons dit plus haut, lorsque les appareils électroniques se cassent ou rouillent, ils libèrent des toxines qui entraînent la pollution de l\'air et créent un trou dans la couche d\'ozone (qui nous protège des rayons UV du soleil et se trouve dans le ciel). Si cette couche est endommagée et que nous y sommes exposés, nous mourrons à cause du rayonnement du soleil.',
+                    'question3': 'Moyens de réduire l\'impact négatif des appareils électroniques sur l\'environnement',
+                    'summary3': 'Un résumé de ce que nous avons découvert:',
+                    'answer3': 'Nous avons trouvé de nombreuses façons de réduire l\'impact négatif des appareils électroniques sur l\'environnement. Elles sont destinées à ce que vous pouvez faire ! Comme indiqué plus haut dans la section qui dit « Comment pouvons-nous arrêter cela ? », il y a une partie qui dit que si vous avez des appareils cassés, vendez-les comme ferraille à d\'autres entreprises ou sites Web, et cette partie est très importante car c\'est une situation gagnant-gagnant car cela vous aide à vous débarrasser des toxines que vous avez dans votre maison et ils vous paient également pour cela et ils recyclent également les pièces utilisables des appareils électroniques et les mettent dans d\'autres appareils, ce qui les aide, notre planète et vous.',
+                    'thankYou': 'Merci d\'avoir lu!',
+                    'references': 'Références/Sources',
+                    'copyright': '&copy; 2025 Campagne de sensibilisation. Tous droits réservés.'
+                }
+            };
+
+            let langData = translations[lang];
+            if (!langData) {
+                langData = translations['en']; // Default to English
+            }
+
+            const darkMode = document.body.classList.contains("dark-mode");
+            translations['en'].toggleDarkMode = darkMode ? 'Switch to Light Mode &#x2600;' : 'Switch to Dark Mode &#x1F319;';
+            translations['sq'].toggleDarkMode = darkMode ? 'Aktivizo Modalitetin e Lehtë &#x2600;' : 'Aktivizo Modalitetin e Errët &#x1F319;';
+            translations['de'].toggleDarkMode = darkMode ? 'Zum Hellmodus wechseln &#x2600;' : 'Zum Dunkelmodus wechseln &#x1F319;';
+            translations['fr'].toggleDarkMode = darkMode ? 'Passer au mode clair &#x2600;' : 'Passer au mode sombre &#x1F319;';
+
+            document.title = langData.title;
+            document.querySelector('header h1').textContent = langData.headerTitle;
+            document.querySelector('.toggle-btn').innerHTML = translations[lang].toggleDarkMode;
+            document.querySelector('.container:nth-of-type(1) h2').textContent = langData.aboutCause;
+            document.querySelector('.container:nth-of-type(1) p').textContent = langData.causeText;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(1) strong').textContent = langData.landPollution;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(1)').childNodes[1].textContent = ' - ' + langData.landPollutionText;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(2) strong').textContent = langData.waterPollution;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(2)').childNodes[1].textContent = ' - ' + langData.waterPollutionText;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(3) strong').textContent = langData.airPollution;
+            document.querySelector('.container:nth-of-type(1) ul li:nth-child(3)').childNodes[1].textContent = ' - ' + langData.airPollutionText;
+            document.querySelector('.container:nth-of-type(1) h2:nth-of-type(2)').textContent = langData.howStop;
+            document.querySelector('.container:nth-of-type(1) p:nth-of-type(2)').textContent = langData.howStopText;
+
+            // Research Questions
+            document.querySelector('.container:nth-of-type(2) h2').textContent = langData.researchQuestions;
+            document.querySelector('.container:nth-of-type(2) h3:nth-of-type(1)').textContent = langData.question1;
+            document.querySelector('.container:nth-of-type(2) h4:nth-of-type(1)').textContent = langData.summary1;
+            document.querySelector('.container:nth-of-type(2) p:nth-of-type(1)').textContent = langData.answer1;
+            document.querySelector('.container:nth-of-type(2) h3:nth-of-type(2)').textContent = langData.question2;
+            document.querySelector('.container:nth-of-type(2) h4:nth-of-type(2)').textContent = langData.summary2;
+            document.querySelector('.container:nth-of-type(2) p:nth-of-type(2)').textContent = langData.answer2;
+            document.querySelector('.container:nth-of-type(2) h3:nth-of-type(3)').textContent = langData.question3;
+            document.querySelector('.container:nth-of-type(2) h4:nth-of-type(3)').textContent = langData.summary3;
+            document.querySelector('.container:nth-of-type(2) p:nth-of-type(3)').textContent = langData.answer3;
+
+            document.querySelector('.container:nth-of-type(3) h2').textContent = langData.thankYou;
+            document.querySelector('.container:nth-of-type(4) h2').textContent = langData.references;
+            document.querySelector('footer p').innerHTML = langData.copyright;
+        }
+
+        /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+            document.querySelector('.dropbtn').classList.toggle('active'); /* Toggle active class */
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        document.querySelector('.dropbtn').classList.remove('active'); /* Remove active class */
+                    }
+                }
+            }
+        }
+
+        // Initialize dark mode and button text on page load
+        window.onload = function() {
+            const darkMode = document.body.classList.contains("dark-mode");
+            const toggleBtn = document.querySelector('.toggle-btn');
+
+            // Set initial toggleDarkMode value in translations for English
+            const translations = {
+                'en': {
+                    'toggleDarkMode': darkMode ? 'Switch to Light Mode &#x2600;' : 'Switch to Dark Mode &#x1F319;'
+                },
+                'sq': {
+                    'toggleDarkMode': darkMode ? 'Aktivizo Modalitetin e Lehtë &#x2600;' : 'Aktivizo Modalitetin e Errët &#x1F319;'
+                },
+                'de': {
+                    'toggleDarkMode': darkMode ? 'Zum Hellmodus wechseln &#x2600;' : 'Zum Dunkelmodus wechseln &#x1F319;'
+                },
+                'fr': {
+                    'toggleDarkMode': darkMode ? 'Passer au mode clair &#x2600;' : 'Passer au mode sombre &#x1F319;'
+                }
+            };
+
+            toggleBtn.innerHTML = translations[currentLanguage].toggleDarkMode;
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Raise Awareness for a Better Future</h1>
+        <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Languages</button>
+            <div id="myDropdown" class="dropdown-content">
+                <button onclick="changeLanguage('sq')">Shqip</button>
+                <button onclick="changeLanguage('en')">English</button>
+                <button onclick="changeLanguage('de')">Deutsch</button>
+                <button onclick="changeLanguage('fr')">Français</button>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="image-container">
+                <img src="https://t3.ftcdn.net/jpg/04/80/44/88/360_F_480448858_Bw6oFvgWXyZJ4ZBXp1Gg5cEQYZy74Tt5.jpg" alt="Awareness Campaign">
+            </div>
+            <h2>About Our Cause</h2>
+            <p>Every year, countless broken devices and trash are discarded improperly. When electronic devices are thrown away, it contributes to e-waste. Pollution comes in three main forms:</p>
+            <ul>
+                <li><strong>Land Pollution</strong> - Waste discarded on land, such as trash and debris.</li>
+                <li><strong>Water Pollution</strong> - Contaminants like plastics that pollute our oceans and rivers.</li>
+                <li><strong>Air Pollution</strong> - Harmful gases and toxins released into the air, including those from e-waste.</li>
+            </ul>
+            <p>When e-waste is improperly disposed of, rusted and broken electronics release toxic substances into the environment, affecting air quality.</p>
+            <h2>How Can We Stop This?</h2>
+            <p>We can reduce e-waste by recycling, selling old electronics instead of discarding them, and using platforms like Jawa to repurpose gadgets. This helps keep our environment clean and protects us from radiation and toxins.</p>
+        </div>
+        <div class="container">    
+            <h2>Our Research Questions</h2>
+            <h3>How electronics are made and what resources they use?</h3>
+            <h4>A summary of what we found out:</h4>
+            <p>We found out that electronics are made by using an automated and manual procces. What I mean by this is that most of the stuff (like the carving of the bronze motherboards which is done by a robot) and the other part is getting made by humans (like heating the wrap around it) there are some electronic parts that get completely made by robots (like Printed Circuit Boards or PCBs for short). Mostly electronic parts are made by Finite Recources of non-renewable resources like lead or bronze or tin which means that if we keep using these resources they will eventually run out and cause a problem.<p>
+            <h3>How e-waste and pollution from electronics affect animals and the planet?</h3>
+            <h4>A summary of what we found out:</h4>
+            <p>We found out that e-waste can add air pollution and land pollution and this ia a very concerable problem in the world and it has to get fixed. It affects animals and the planst by the pollution part and the waste part. On land pollution  animals can stumble across and think of the waste as food and eat the waste which gets them sick and they eventually (by the uncurable sickness) they unfortunatly die. But they affect the planet by polluting the air. As we said above when electronics get broken or rusted they release toxins which leads to air pollution and makes a hole in the ozone layes (protects us from the UV Lights of the sun and is located on the sky) if that layer gets damaged and we get exposed from it we will die to the radiation of the sun.<p>
+            <h3>Ways to reduce the negative impact of electronics on the environment</h3>
+            <h4>A summary of what we found out:</h4>
+            <p>We found a lot of ways to reduce the negative impact of electronics on the environment. They are for what you guys can do! As above at the section that says "How can we stop this?" there is a part that says that if you have any broken devices sell them as scrap to other companies or websites and this part is very important because it a win-win because it helps you to get rid of the toxins that you have in your house and they also pay you for it and they also recycle the usable parts from the electronic device/s and put them into other devices wich helps them, our planet and you guys.</p>
+        </div>
+        <div class="container">
+            <h2>Thank You for Reading!</h2>
+        </div>    
+        <div class="container">
+            <h2>References/Sources</h2>
+            <ul>
+                <li><a href="https://stock.adobe.com/search?k=pollution&asset_id=480448858" target="_blank">Adobe Stock - Helped to find images</a></li>
+                <li><a href="https://app.netlify.com/drop" target="_blank">Netlify - Helped to publish the website </a></li>
+                <li><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot - Helped with the code</a></li>
+                <li><a href="https://chatgpt.com" target="_blank">ChatGPT - Helped with the code</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Pollution" target="_blank">Wikipedia - Pollution - Helped with the research</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Electronic_waste" target="_blank">Wikipedia - E-waste - Helped with the research</a></li>
+                <li><a href="https://www.who.int/news-room/fact-sheets/detail/electronic-waste-(e-waste)" target="_blank">World Health Organisation (WHO) - E-waste - Helped with the research</a></li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 Awareness Campaign. All rights reserved.</p>
+    </footer>
+</body>
+</html>
